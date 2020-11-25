@@ -1,7 +1,17 @@
 import socket
 import sys
 import pickle
-import camera
+from camera import ptzcam
+
+def is_digit(string):
+    if string.isdigit():
+       return True
+    else:
+        try:
+            float(string)
+            return True
+        except ValueError:
+            return False
 
 def run_server(port):
     serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -28,7 +38,7 @@ def serve_client(client_sock, client_address, port):
         print ('Произошло внезапное отключение', client_address)
     else:
         obj = pickle.loads(data)
-        camera = camera.ptzcam(obj[0], obj[1], obj[2], obj[3])
+        camera = ptzcam(obj[0], obj[1], obj[2], obj[3])
         if camera.mycam == None:
             return False
         else: 
@@ -50,16 +60,16 @@ def serve_client(client_sock, client_address, port):
                     if len(chunk) == 1 and chunk[0] == "exit":
                         client_sock.sendall("exit".encode())
                         break
-                    elif  len(chunk) == 3:
+                    elif  len(chunk) == 3 and is_digit(chunk[1]) and is_digit(chunk[2]):
                         
                         if  chunk[0] == "tilt":
-                            camera.move_tilt(chunk[1], chunk[2])
+                            camera.move_tilt(float(chunk[1]), float(chunk[2]))
                             
                         elif  chunk[0] == "pan":
-                            camera.move_pan(chunk[1], chunk[2])
+                            camera.move_pan(float(chunk[1]), float(chunk[2]))
                             
                         elif chunk[0] == "zoom":
-                            camera.zoom(chunk[1], chunk[2])
+                            camera.zoom(float(chunk[1]), float(chunk[2]))
                             
                         else:
                             client_sock.sendall('Неверная команда'.encode())
