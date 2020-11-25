@@ -17,7 +17,7 @@ while True:
     message = client_sock.recv(2048).decode()
     print(message)
     
-    if message ==  'Успешное подключение':
+    if message ==  'Successful connection':
         break
 
 while True:
@@ -25,7 +25,7 @@ while True:
     if message == "exit":
         break
     
-    elif message == 'Неверная команда':
+    elif message == 'Invalid command':
         print(message)
         continue
         
