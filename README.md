@@ -34,9 +34,9 @@ user.disconnect_from_server()
 # Команды камеры
 Функция command_to_camera(command, velocity , timeout) принимает три параметра
 - command - тип команды 
-  -pan - движение по оси x
-  -til - движение по оси y
-  -zoom - приближение/удаление
+    -pan - движение по оси x
+    -til - движение по оси y
+    -zoom - приближение/удаление
 - velocity - скорость движения
 - timeout - время движения
 
