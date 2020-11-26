@@ -31,3 +31,13 @@ user.disconnect_from_server()
 2020-11-26 19:39:43 User ('127.0.0.1', 55538) finished work camera with (172.18.212.17, 80)
 2020-11-26 19:39:43 User ('127.0.0.1', 55538) disconnected from server
 ```
+# Команды камеры
+Функция command_to_camera(command, velocity , timeout) принимает три параметра
+- command - тип команды 
+  -pan - движение по оси x
+  -til - движение по оси y
+  -zoom - приближение/удаление
+- velocity - скорость движения
+- timeout - время движения
+
+
